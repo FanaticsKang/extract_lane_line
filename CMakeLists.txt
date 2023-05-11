@@ -34,17 +34,17 @@ set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
 #include_directories( ${CERES_INCLUDE_DIRS} )
 
 #Opencv
-if(OPENCV_PATH)
-    set(OpenCV_LIBS ${OPENCV_PATH}/build/lib/libopencv_imgproc.so
-                    ${OPENCV_PATH}/build/lib/libopencv_highgui.so
-                    ${OPENCV_PATH}/build/lib/libopencv_core.so
-                    ${OPENCV_PATH}/build/lib/libopencv_imgcodecs.so)
+# if(OPENCV_PATH)
+#     set(OpenCV_LIBS ${OPENCV_PATH}/build/lib/libopencv_imgproc.so
+#                     ${OPENCV_PATH}/build/lib/libopencv_highgui.so
+#                     ${OPENCV_PATH}/build/lib/libopencv_core.so
+#                     ${OPENCV_PATH}/build/lib/libopencv_imgcodecs.so)
 
-    set(OpenCV_INCLUDE_DIRS ${OPENCV_PATH}/include)
+#     set(OpenCV_INCLUDE_DIRS ${OPENCV_PATH}/include)
 
-else()
+# else()
     find_package(OpenCV 3.2.0 REQUIRED)
-endif()
+# endif()
 #include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 #G2O

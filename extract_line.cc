@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
+#include <opencv2/ximgproc.hpp>
+
 #include <vector>
 cv::Mat CalculateArea(const cv::Mat& edge_img, const double area_thresold) {
   // 统计边缘包围的面积
@@ -16,6 +18,19 @@ cv::Mat CalculateArea(const cv::Mat& edge_img, const double area_thresold) {
     }
     totalArea += area;
   }
+
+  int maxContourIndex = -1;
+  double maxContourLength = 0;
+  for (int i = 0; i < contours.size(); i++) {
+    double contourLength = arcLength(contours[i], true);
+    if (contourLength > maxContourLength) {
+      maxContourIndex = i;
+      maxContourLength = contourLength;
+    }
+  }
+
+  // 提取轮廓骨干
+
   return img;
 }
 
@@ -83,6 +98,10 @@ int main(int argc, char* argv[]) {
     result_close.copyTo(roi4);
 
     cv::Mat contours = CalculateArea(edges, 60);
+
+    cv::Mat skeleton;
+    cv::ximgproc::thinning(img, skeleton, cv::ximgproc::THINNING_ZHANGSUEN);
+    cv::imshow("skeleton", skeleton);
 
     // 显示结果
     cv::imshow("Input Image", img);
