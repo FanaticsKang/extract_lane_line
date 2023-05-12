@@ -56,3 +56,5 @@ set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cc)
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 
+add_subdirectory(sem_point)
+
